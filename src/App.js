@@ -3,13 +3,15 @@ import { Routes, Route, Link } from "react-router-dom";
 
 import Login from "./Login";
 import Home from "./Home";
+import Detail from "./Detail";
 
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="login" element={<Login />} />
+      <Route path="/" element={<Login />} />
+      <Route path="home" element={<Home />} />
       <Route path="about" element={<About />} />
+      <Route path="detail" element={<Detail />} />
     </Routes>
   );
 };
