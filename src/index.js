@@ -1,6 +1,11 @@
-import './App.css';
-import { useEffect, useState } from 'react';
-import ReactDOM  from 'react-dom';
-import App from './App';
+import * as ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+import "./input.css";
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById("root")
+);

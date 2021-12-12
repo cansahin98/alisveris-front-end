@@ -1,27 +1,44 @@
-import { useEffect, useState } from 'react';
-import ReactDOM  from 'react-dom';
-import axios from 'axios';
+import * as React from "react";
+import { Routes, Route, Link } from "react-router-dom";
+
+import Login from "./Login";
+import Home from "./Home";
 
 const App = () => {
   return (
-    <div>
-        Alisveris
-    </div>
-  )
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="login" element={<Login />} />
+      <Route path="about" element={<About />} />
+    </Routes>
+  );
+};
+
+function About() {
+  return (
+    <>
+      <main>
+        <h2>Who are we?</h2>
+        <p>That feels like an existential question, don't you think?</p>
+      </main>
+      <nav>
+        <Link to="/">Home</Link>
+      </nav>
+    </>
+  );
 }
 
 export default App;
 
-
 //function App() {
 
- // const [deneme, setDeneme] = useState([]);
+// const [deneme, setDeneme] = useState([]);
 
- // useEffect(() => {
- //   fetch('http://localhost:8080/deneme/list')
- //   .then(response => response.json())
- //   .then(response => setDeneme(response))
- /* }, [])
+// useEffect(() => {
+//   fetch('http://localhost:8080/deneme/list')
+//   .then(response => response.json())
+//   .then(response => setDeneme(response))
+/* }, [])
 
   console.log('Deneme Bilgileri: ', deneme);
   
