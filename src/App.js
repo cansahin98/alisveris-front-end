@@ -4,6 +4,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import Login from "./Login";
 import Home from "./Home";
 import Detail from "./Detail";
+import { Switch } from "@headlessui/react";
 
 const App = () => {
   return (
@@ -11,10 +12,12 @@ const App = () => {
       <Route path="/" element={<Login />} />
       <Route path="home" element={<Home />} />
       <Route path="about" element={<About />} />
-      <Route path="detail" element={<Detail />} />
+      <Route path="/home/detail" component={Detail} />
     </Routes>
+
   );
 };
+
 
 function About() {
   return (

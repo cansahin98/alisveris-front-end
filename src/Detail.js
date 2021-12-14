@@ -1,9 +1,167 @@
 import { useState } from "react";
-import { StarIcon } from "@heroicons/react/solid";
-import { RadioGroup } from "@headlessui/react";
-import { CurrencyDollarIcon, GlobeIcon } from "@heroicons/react/outline";
+import * as React from "react";
+import { Link } from "react-router-dom";
+import Home from "./Home";
 
-const product = {
+
+
+const products = [
+  {
+    id: 1,
+    name: "Sırt Çantası (Laptop,notebook,okul, Spor ) Unisex",
+    href: "detail",
+    price: "49,99TL",
+    imageSrc:
+      require("./item5.jpg"),
+    imageAlt:
+      "Tall slender porcelain bottle with natural clay textured body and cork stopper.",
+  },
+  {
+    id: 2,
+    name: "Unisex Premium Bel Çantası Apba012700 APBA0127",
+    href: "detail",
+    price: "48,88TL",
+    imageSrc:
+      require("./item6.jpg"),
+    imageAlt:
+      "Olive drab green insulated bottle with flared screw lid and flat top.",
+  },
+  {
+    id: 3,
+    name: "Michel Erkek Güneş Gözlüğü",
+    href: "#",
+    price: "40,50TL",
+    imageSrc:
+      require("./item7.jpg"),
+    imageAlt:
+      "Person using a pen to cross a task off a productivity paper card.",
+  },
+  {
+    id: 4,
+    name: "Kadın Gri Cüzdan",
+    href: "#",
+    price: "49,99TL",
+    imageSrc:
+      require("./item8.jpg"),
+    imageAlt:
+      "Hand holding black machined steel mechanical pencil with brass tip and top.",
+  },
+  {
+    id: 5,
+    name: "Lacivert Erkek Geniş Kalıplı Oversize Fit Eşofman Altı",
+    href: "#",
+    price: "89,99TL",
+    imageSrc:
+      require("./item1.jpg"),
+    imageAlt:
+      "Hand holding black machined steel mechanical pencil with brass tip and top.",
+  },
+  {
+    id: 6,
+    name: "Siyah Erkek Regular Fit Degaje Yaka Uzun Kollu Basic Sweatshirt",
+    href: "#",
+    price: "99,99TL",
+    imageSrc:
+      require("./item2.jpg"),
+    imageAlt:
+      "Hand holding black machined steel mechanical pencil with brass tip and top.",
+  },
+  {
+    id: 7,
+    name: "Antrasit Erkek Regular Fit Lastik Paça Basic Eşofman Altı",
+    href: "#",
+    price: "109,99TL",
+    imageSrc:
+      require("./item3.jpg"),
+    imageAlt:
+      "Hand holding black machined steel mechanical pencil with brass tip and top.",
+  },
+  {
+    id: 8,
+    name: "Siyah Erkek Oversize Fit Sweatshirt",
+    href: "#",
+    price: "139,99TL",
+    imageSrc:
+      require("./item4.jpg"),
+    imageAlt:
+      "Hand holding black machined steel mechanical pencil with brass tip and top.",
+  },
+  {
+    id: 9,
+    name: "Erkek Siyah Cüzdan",
+    href: "#",
+    price: "49,99TL",
+    imageSrc:
+      require("./item9.jpg"),
+    imageAlt:
+      "Hand holding black machined steel mechanical pencil with brass tip and top.",
+  },
+  {
+    id: 10,
+    name: "Unisex Siyah Güneş Gözlüğü",
+    href: "#",
+    price: "29,99TL",
+    imageSrc:
+      require("./item10.jpg"),
+    imageAlt:
+      "Hand holding black machined steel mechanical pencil with brass tip and top.",
+  },
+  {
+    id: 11,
+    name: "Aqua Di Polo 2'li Erkek Güneş Gözlüğü Set",
+    href: "#",
+    price: "39,99TL",
+    imageSrc:
+      require("./item11.jpg"),
+    imageAlt:
+      "Hand holding black machined steel mechanical pencil with brass tip and top.",
+  },
+  {
+    id: 12,
+    name: "Daisy 3 Lü Kanepe",
+    href: "#",
+    price: "2390TL",
+    imageSrc:
+      require("./item12.jpg"),
+    imageAlt:
+      "Hand holding black machined steel mechanical pencil with brass tip and top.",
+  },
+  {
+    id: 13,
+    name: "Zigon Sehpa Ve Orta Sehpa Kr Set Gold Efes",
+    href: "#",
+    price: "289,99TL",
+    imageSrc:
+      require("./item13.jpg"),
+    imageAlt:
+      "Hand holding black machined steel mechanical pencil with brass tip and top.",
+  },
+  {
+    id: 14,
+    name: "Sehpa Geniş Çantalı Kitaplık Çiçeklik Metal Atlantik Çam",
+    href: "#",
+    price: "159,90TL",
+    imageSrc:
+      require("./item14.jpg"),
+    imageAlt:
+      "Hand holding black machined steel mechanical pencil with brass tip and top.",
+  },
+  {
+    id: 15,
+    name: "Lavinia Puf Kalorifer Önü Palet Minderi Ikili Takım Antrasit",
+    href: "#",
+    price: "225TL",
+    imageSrc:
+      require("./item15.jpg"),
+    imageAlt:
+      "Hand holding black machined steel mechanical pencil with brass tip and top.",
+  },
+
+];
+
+
+const product = 
+{
   name: "Basic Tee",
   price: "$35",
   rating: 3.9,
@@ -21,36 +179,6 @@ const product = {
       imageAlt: "Back of women's Basic Tee in black.",
       primary: true,
     },
-    {
-      id: 2,
-      imageSrc:
-        "https://tailwindui.com/img/ecommerce-images/product-page-01-product-shot-01.jpg",
-      imageAlt: "Side profile of women's Basic Tee in black.",
-      primary: false,
-    },
-    {
-      id: 3,
-      imageSrc:
-        "https://tailwindui.com/img/ecommerce-images/product-page-01-product-shot-02.jpg",
-      imageAlt: "Front of women's Basic Tee in black.",
-      primary: false,
-    },
-  ],
-  colors: [
-    { name: "Black", bgColor: "bg-gray-900", selectedColor: "ring-gray-900" },
-    {
-      name: "Heather Grey",
-      bgColor: "bg-gray-400",
-      selectedColor: "ring-gray-400",
-    },
-  ],
-  sizes: [
-    { name: "XXS", inStock: true },
-    { name: "XS", inStock: true },
-    { name: "S", inStock: true },
-    { name: "M", inStock: true },
-    { name: "L", inStock: true },
-    { name: "XL", inStock: false },
   ],
   description: `
     <p>The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. They are hand cut and sewn locally, with a special dye technique that gives each tee it's own look.</p>
@@ -63,27 +191,15 @@ const product = {
     "Machine wash cold with similar colors",
   ],
 };
-const policies = [
-  {
-    name: "International delivery",
-    icon: GlobeIcon,
-    description: "Get your order in 2 years",
-  },
-  {
-    name: "Loyalty rewards",
-    icon: CurrencyDollarIcon,
-    description: "Don't look at other tees",
-  },
-];
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Detail() {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
-
+const Detail = props => {
+  const { id } = Home.props.product;
+  console.log(id);
   return (
     <div className="bg-white">
       <div className="pt-6 pb-16 sm:pb-24">
@@ -137,44 +253,6 @@ export default function Detail() {
                   {product.price}
                 </p>
               </div>
-              {/* Reviews */}
-              <div className="mt-4">
-                <h2 className="sr-only">Reviews</h2>
-                <div className="flex items-center">
-                  <p className="text-sm text-gray-700">
-                    {product.rating}
-                    <span className="sr-only"> out of 5 stars</span>
-                  </p>
-                  <div className="ml-1 flex items-center">
-                    {[0, 1, 2, 3, 4].map((rating) => (
-                      <StarIcon
-                        key={rating}
-                        className={classNames(
-                          product.rating > rating
-                            ? "text-yellow-400"
-                            : "text-gray-200",
-                          "h-5 w-5 flex-shrink-0"
-                        )}
-                        aria-hidden="true"
-                      />
-                    ))}
-                  </div>
-                  <div
-                    aria-hidden="true"
-                    className="ml-4 text-sm text-gray-300"
-                  >
-                    ·
-                  </div>
-                  <div className="ml-4 flex">
-                    <a
-                      href="#"
-                      className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                    >
-                      See all {product.reviewCount} reviews
-                    </a>
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* Image gallery */}
@@ -199,98 +277,7 @@ export default function Detail() {
             </div>
 
             <div className="mt-8 lg:col-span-5">
-              <form>
-                {/* Color picker */}
-                <div>
-                  <h2 className="text-sm font-medium text-gray-900">Color</h2>
-
-                  <RadioGroup
-                    value={selectedColor}
-                    onChange={setSelectedColor}
-                    className="mt-2"
-                  >
-                    <RadioGroup.Label className="sr-only">
-                      Choose a color
-                    </RadioGroup.Label>
-                    <div className="flex items-center space-x-3">
-                      {product.colors.map((color) => (
-                        <RadioGroup.Option
-                          key={color.name}
-                          value={color}
-                          className={({ active, checked }) =>
-                            classNames(
-                              color.selectedColor,
-                              active && checked ? "ring ring-offset-1" : "",
-                              !active && checked ? "ring-2" : "",
-                              "-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none"
-                            )
-                          }
-                        >
-                          <RadioGroup.Label as="p" className="sr-only">
-                            {color.name}
-                          </RadioGroup.Label>
-                          <span
-                            aria-hidden="true"
-                            className={classNames(
-                              color.bgColor,
-                              "h-8 w-8 border border-black border-opacity-10 rounded-full"
-                            )}
-                          />
-                        </RadioGroup.Option>
-                      ))}
-                    </div>
-                  </RadioGroup>
-                </div>
-
-                {/* Size picker */}
-                <div className="mt-8">
-                  <div className="flex items-center justify-between">
-                    <h2 className="text-sm font-medium text-gray-900">Size</h2>
-                    <a
-                      href="#"
-                      className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                    >
-                      See sizing chart
-                    </a>
-                  </div>
-
-                  <RadioGroup
-                    value={selectedSize}
-                    onChange={setSelectedSize}
-                    className="mt-2"
-                  >
-                    <RadioGroup.Label className="sr-only">
-                      Choose a size
-                    </RadioGroup.Label>
-                    <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
-                      {product.sizes.map((size) => (
-                        <RadioGroup.Option
-                          key={size.name}
-                          value={size}
-                          className={({ active, checked }) =>
-                            classNames(
-                              size.inStock
-                                ? "cursor-pointer focus:outline-none"
-                                : "opacity-25 cursor-not-allowed",
-                              active
-                                ? "ring-2 ring-offset-2 ring-indigo-500"
-                                : "",
-                              checked
-                                ? "bg-indigo-600 border-transparent text-white hover:bg-indigo-700"
-                                : "bg-white border-gray-200 text-gray-900 hover:bg-gray-50",
-                              "border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                            )
-                          }
-                          disabled={!size.inStock}
-                        >
-                          <RadioGroup.Label as="p">
-                            {size.name}
-                          </RadioGroup.Label>
-                        </RadioGroup.Option>
-                      ))}
-                    </div>
-                  </RadioGroup>
-                </div>
+              <form>    
 
                 <button
                   type="submit"
@@ -325,39 +312,13 @@ export default function Detail() {
                   </ul>
                 </div>
               </div>
-
-              {/* Policies */}
-              <section aria-labelledby="policies-heading" className="mt-10">
-                <h2 id="policies-heading" className="sr-only">
-                  Our Policies
-                </h2>
-
-                <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                  {policies.map((policy) => (
-                    <div
-                      key={policy.name}
-                      className="bg-gray-50 border border-gray-200 rounded-lg p-6 text-center"
-                    >
-                      <dt>
-                        <policy.icon
-                          className="mx-auto h-6 w-6 flex-shrink-0 text-gray-400"
-                          aria-hidden="true"
-                        />
-                        <span className="mt-4 text-sm font-medium text-gray-900">
-                          {policy.name}
-                        </span>
-                      </dt>
-                      <dd className="mt-1 text-sm text-gray-500">
-                        {policy.description}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-              </section>
             </div>
           </div>
         </div>
       </div>
     </div>
   );
+  
 }
+
+export default Detail;

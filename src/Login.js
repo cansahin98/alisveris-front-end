@@ -1,27 +1,36 @@
 import React, { useState } from "react";
-import { axios } from "axios";
+import axios  from "axios";
 import { Link } from "react-router-dom";
 
+let status;
+
 function Login() {
-  const [userName, setUserName] = useState("");
+  const [user_name, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   const handleUserNameChange = (event) => setUserName(event.target.value);
   const handlePasswordChange = (event) => setPassword(event.target.value);
-  const handleSubmit = (event) => {
-    axios
-      .post("/user/login", {
-        userName,
-        password,
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    event.preventDefault();
+  const handleSubmit = () => {
+
+
+    const response = addUser();
+    console.log(response.status);
   };
+
+  const addUser = () => {
+    return axios
+        .post('http://localhost:8080/user/login', null, { params: {
+            user_name,
+            password
+          }})
+        .then(response =>
+            response.status)
+        .catch(err =>
+            console.warn(err));
+  }
+
+  
+
 
   return (
     <>
@@ -44,9 +53,9 @@ function Login() {
                 </label>
                 <div className="mt-1">
                   <input
-                    id="userName"
-                    name="userName"
-                    type="userName"
+                    id="user_name"
+                    name="user_name"
+                    type="user_name"
                     autoComplete="userName"
                     onChange={handleUserNameChange}
                     required
