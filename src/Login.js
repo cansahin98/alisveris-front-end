@@ -1,36 +1,33 @@
 import React, { useState } from "react";
-import axios  from "axios";
-import { Link } from "react-router-dom";
-
-let status;
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  let navigate = useNavigate();
+  const [userExists, setUserExists] = useState(true);
   const [user_name, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   const handleUserNameChange = (event) => setUserName(event.target.value);
   const handlePasswordChange = (event) => setPassword(event.target.value);
-  const handleSubmit = () => {
-
-
-    const response = addUser();
-    console.log(response.status);
+  const handleSubmit = (event) => {
+    authenticateUser();
+    event.preventDefault();
   };
 
-  const addUser = () => {
+  const authenticateUser = () => {
     return axios
-        .post('http://localhost:8080/user/login', null, { params: {
-            user_name,
-            password
-          }})
-        .then(response =>
-            response.status)
-        .catch(err =>
-            console.warn(err));
-  }
-
-  
-
+      .post("http://localhost:8080/user/login", null, {
+        params: {
+          user_name,
+          password,
+        },
+      })
+      .then((response) => {
+        if (response.status === 200) navigate("/products", { state: "" });
+      })
+      .catch((err) => setUserExists(false));
+  };
 
   return (
     <>
@@ -109,6 +106,16 @@ function Login() {
                   </a>
                 </div>
               </div>
+
+              {!userExists ? (
+                <div>
+                  <p className="mt-2 text-sm text-red-600" id="email-error">
+                    Your password or user name is incorrect
+                  </p>
+                </div>
+              ) : (
+                <div></div>
+              )}
 
               <div>
                 <button
